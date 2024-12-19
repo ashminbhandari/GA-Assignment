@@ -14,8 +14,6 @@ int sub_sort(int arr[], int i, int j)
     int pivot_idx = i + rand() % (j - i + 1);
     int pivot_value = arr[pivot_idx];
 
-    cout << pivot_value;
-
     // move pivot element to the end
     swap(arr[j], arr[pivot_idx]);
 
