@@ -1,3 +1,17 @@
+(defun insert (item sorted)
+  (cond
+    ((null sorted) (list item)) ; if sorted is empty, which it will be at first, then return a list with just the item 
+    ((>= item (car sorted)) (cons item sorted)) ; if item is greater than the first element of the sorted list then we have found the insertion spot, insert it 
+    (t (cons (car sorted) (insert item (cdr sorted)))))) ; else recursively run insert again with the item and remaining portion of the sorted list (except 1st element)
+
+(defun insertion-sort (unsorted)
+  (let ((sorted '())) 
+    (loop while unsorted ; while elements remain in the unsorted list 
+          do (setf sorted (insert (pop unsorted) sorted))) ; pop the 1st element out from the unsorted list and insert it into the new sorted list 
+    sorted))
+
+(print(reverse(insertion-sort '(101 1 2 10 9 55 1 2 3 5 8 7 6 1999 11)))) ; needs to be reversed because of descending order
+
 
 #|
 
@@ -43,20 +57,6 @@ There are two ways in which the process can terminate – what are they?
 Answer - We can terminate once the unsorted list is now empty or the reverse of that (sorted is full). 
 In the below implementation, items that have been examined were not tracked, instead they were simply popped off the unsorted list which is O(1) operation.
 |#
-
-(defun insert (item sorted)
-  (cond
-    ((null sorted) (list item)) ; if sorted is empty, which it will be at first, then return a list with just the item 
-    ((>= item (car sorted)) (cons item sorted)) ; if item is greater than the first element of the sorted list then we have found the insertion spot, insert it 
-    (t (cons (car sorted) (insert item (cdr sorted)))))) ; else recursively run insert again with the item and remaining portion of the sorted list (except 1st element)
-
-(defun insertion-sort (unsorted)
-  (let ((sorted '())) 
-    (loop while unsorted ; while elements remain in the unsorted list 
-          do (setf sorted (insert (pop unsorted) sorted))) ; pop the 1st element out from the unsorted list and insert it into the new sorted list 
-    sorted))
-
-(print(reverse(insertion-sort '(101 1 2 10 9 55 1 2 3 5 8 7 6 1999 11)))) ; needs to be reversed because of descending order
 
 
 
